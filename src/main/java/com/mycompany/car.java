@@ -226,41 +226,6 @@ public class car {
 
     }
 
-    void deleteCar(String carReg) {
-
-        try {
-            File inputFile = new File("car.txt");
-            File tempFile = new File("myTempFile.txt");
-
-            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-
-            String lineToRemove = "n	Nadia	10000";
-            String currentLine;
-
-            while ((currentLine = reader.readLine()) != null) {
-                // trim newline when comparing with lineToRemove
-                String trimmedLine = currentLine.trim();
-                if (trimmedLine.equals(lineToRemove)) {
-                    continue;
-                }
-                writer.write(currentLine + System.getProperty("line.separator"));
-            }
-            reader.close();
-            writer.close();
-
-//            File processCheck = new File("car.txt");
-//            File processCheck1 = new File("myTempFile.txt");
-////        Boolean canBeDeleted = processCheck.canWrite();
-////        JOptionPane.showMessageDialog(null, canBeDeleted);
-////            File demo = new File("demo.txt");
-//            boolean successful = processCheck.renameTo(processCheck);
-//            JOptionPane.showMessageDialog(null, successful);
-        } catch (Exception e) {
-
-        }
-    }
-    
     void delet(String license){
         String[] cInfo = getCarInfo(license);
         String infoToBeRemoved = cInfo[0]+"\t"+cInfo[1]+"\t"+cInfo[2];

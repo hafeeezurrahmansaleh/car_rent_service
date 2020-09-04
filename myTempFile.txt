@@ -1,6 +1,0 @@
-Saleh1234	Nadia	10000
-M	Mouri	100000
-o	Mouri	100000
-p	Nadia	10000
-q	Mouri	100000
-dfdsf	sdfsdf	sdfsdf
