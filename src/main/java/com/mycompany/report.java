@@ -10,6 +10,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,23 +24,28 @@ import javax.swing.table.DefaultTableModel;
  * @author hafee
  */
 public class report extends javax.swing.JFrame {
+
     String startDate;
     String endDate;
     String car;
     String customer;
     int totalDays;
     double totalCost;
+    
+
     /**
      * Creates new form report
      */
-    report(String sd, String ed, String car, String customer, int td, double tc){
-     this.startDate=sd;
-     this.endDate=ed;
-     this.car=car;
-     this.customer=customer;
-     this.totalDays=td;
-     this.totalCost=tc;
+    report(String sd, String ed, String car, String customer, int td, double tc) {
+        this.startDate = sd;
+        this.endDate = ed;
+        this.car = car;
+        this.customer = customer;
+        this.totalDays = td;
+        this.totalCost = tc;
+        
     }
+
     public report() {
         initComponents();
     }
@@ -51,8 +63,14 @@ public class report extends javax.swing.JFrame {
         reportTable = new javax.swing.JTable();
         totaltransactions = new javax.swing.JLabel();
         totalamount = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Report Generator");
+        setPreferredSize(new java.awt.Dimension(777, 550));
 
         reportTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,33 +88,105 @@ public class report extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        reportTable.setPreferredSize(new java.awt.Dimension(750, 300));
         jScrollPane1.setViewportView(reportTable);
+
+        totaltransactions.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        totalamount.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel4.setOpaque(false);
+
+        jButton8.setText("< Back");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("Log Out");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Calibri", 1, 16)); // NOI18N
+        jLabel8.setText("Transaction Report");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(202, 202, 202)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton8)
+                    .addComponent(jButton9)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(totaltransactions, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                    .addComponent(totalamount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(25, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(totalamount, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totaltransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(totaltransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(totalamount, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGap(0, 171, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        new mainMenu().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        new LoginForm().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,7 +223,8 @@ public class report extends javax.swing.JFrame {
         });
     }
     int n;
-    void generateReport(String reportType){
+
+    void generateReport(String reportType) {
         try {
             File file = new File("rentdetails.txt");
             FileReader fr = new FileReader(file);
@@ -163,8 +254,18 @@ public class report extends javax.swing.JFrame {
                 String customer = tmp[3];
                 int totalDays = Integer.parseInt(tmp[4]);
                 double totalCost = Double.parseDouble(tmp[5]);
+                Date trDate = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(tmp[6]);
+                if(reportType.equals("week")){
+                    if(isDateInCurrentWeek(trDate)){
+                        p[i++] = new report(startDate, endDate, car, customer, totalDays, totalCost);
+                    }
+                }
+                else{
+                    if(isDateInCurrentMonth(trDate)){
+                        p[i++] = new report(startDate, endDate, car, customer, totalDays, totalCost);
+                    }
+                }
                 
-                p[i++] = new report(startDate, endDate, car, customer, totalDays, totalCost);
             }
             br.close();
 
@@ -176,16 +277,45 @@ public class report extends javax.swing.JFrame {
         int numoftr = 0;
         for (i = 0; i < n; i++) {
 //            if (p[i].scategory.equals(catgr)) {
-                model.addRow(new Object[]{p[i].startDate, p[i].endDate, p[i].car,p[i].customer, p[i].totalDays, p[i].totalCost});
-                totalamnt += p[i].totalCost;
-                numoftr ++;
+            try{
+            model.addRow(new Object[]{p[i].startDate, p[i].endDate, p[i].car, p[i].customer, p[i].totalDays, p[i].totalCost});
+            totalamnt += p[i].totalCost;
+            numoftr++;
+            }
+            catch(Exception e){
+               
+            }
 //            }
         }
-        totaltransactions.setText("Total number of transactions in this "+reportType+": "+numoftr);
-        totalamount.setText("Total amount earned: "+totalamnt);
+        totaltransactions.setText("Total number of transactions in current " + reportType + ": " + numoftr);
+        totalamount.setText("Total amount earned: " + totalamnt +" MYR");
     }
-    
+
+    public boolean isDateInCurrentMonth(Date givenDate) {
+        ZoneId timeZone = ZoneOffset.UTC; // Use whichever time zone makes sense for your use case
+        LocalDateTime givenLocalDateTime = LocalDateTime.ofInstant(givenDate.toInstant(), timeZone);
+
+        YearMonth currentMonth = YearMonth.now(timeZone);
+
+        return currentMonth.equals(YearMonth.from(givenLocalDateTime));
+    }
+
+    public boolean isDateInCurrentWeek(Date date) {
+        Calendar currentCalendar = Calendar.getInstance();
+        int week = currentCalendar.get(Calendar.WEEK_OF_YEAR);
+        int year = currentCalendar.get(Calendar.YEAR);
+        Calendar targetCalendar = Calendar.getInstance();
+        targetCalendar.setTime(date);
+        int targetWeek = targetCalendar.get(Calendar.WEEK_OF_YEAR);
+        int targetYear = targetCalendar.get(Calendar.YEAR);
+        return week == targetWeek && year == targetYear;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable reportTable;
     private javax.swing.JLabel totalamount;

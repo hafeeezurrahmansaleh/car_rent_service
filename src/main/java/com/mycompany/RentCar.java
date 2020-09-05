@@ -38,54 +38,6 @@ public class RentCar {
 
     public static void main(String[] args) {
 
-//        int c;
-//        try {
-//            File f = new File("car.txt"); //car data pull
-//            Scanner k = new Scanner(f);
-//            c = 0;
-//            while (k.hasNextLine()) {
-//                String data = k.nextLine();
-//                car[c] = data;
-//                c++;
-//                System.out.println(data);
-//            }
-//            k.close();
-//
-//            f = new File("customer.txt"); //customer data pull
-//            k = new Scanner(f);
-//            c = 0;
-//            while (k.hasNextLine()) {
-//                String data = k.nextLine();
-//                customer[c] = data;
-//                c++;
-//                System.out.println(data);
-//            }
-//            k.close();
-//
-//            f = new File("transectionCar.txt"); //trancsection data pull
-//            k = new Scanner(f);
-//            c = 0;
-//            while (k.hasNextLine()) {
-//                String data = k.nextLine();
-//                trnCar[c] = data;
-//                c++;
-//                System.out.println(data);
-//            }
-//            k.close();
-//
-//            f = new File("transectionCustomer.txt"); //transection data pull
-//            k = new Scanner(f);
-//            c = 0;
-//            while (k.hasNextLine()) {
-//                String data = k.nextLine();
-//                trnCustomer[c] = data;
-//                c++;
-//                System.out.println(data);
-//            }
-//            k.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("An error occurred.");
-//        }
         new mainMenu().setVisible(true);
 
     }
@@ -98,7 +50,7 @@ public class RentCar {
         Date d = today.getTime();
         try {
             FileWriter myWriter = new FileWriter("rentdetails.txt", true);
-            myWriter.write(sd + "\t" + ed + "\t" + car + "\t" + customer + "\t" + td + "\t" + tc + "\t" + "\r\n");
+            myWriter.write(sd + "\t" + ed + "\t" + car + "\t" + customer + "\t" + td + "\t" + tc + "\t" +d+ "\r\n");
             myWriter.close();
 
         } catch (IOException e) {

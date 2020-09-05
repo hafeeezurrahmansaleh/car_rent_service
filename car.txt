@@ -1,4 +1,3 @@
-Saleh1234	Saleh	10000
-M	Mouri	100000
-p	Nadia	10000
-q	Mouri	100000
+McLaren720S	McLaren 720S	500
+FerrariSF90	Ferrari SF90 Stradale	4000
+LamborghiniHuracán	Lamborghini Huracán Evo	546
